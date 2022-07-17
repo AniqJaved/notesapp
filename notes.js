@@ -4,8 +4,9 @@ function getNotes(){
     return "Your notes ...";
 }
 
-
-//-----------Adding Notes----------------//
+//-----------------------------------------------//
+//-----------Adding Notes------------------------//
+//-----------------------------------------------//
 
 function addNotes(title,body){
     const notes = loadNotes();
@@ -14,8 +15,8 @@ function addNotes(title,body){
         body: body
     };
 
-    const duplicateNotes = notes.filter(function (notes){
-        return notes.title === title;
+    const duplicateNotes = notes.filter(function (note){
+        return note.title === title;
     });
 
     if(duplicateNotes.length == 0){
@@ -39,7 +40,6 @@ function loadNotes(){
     try{
         const bufferData = fs.readFileSync('add_notes.json');
         const jsonData = bufferData.toString();
-        console.log(jsonData);
         return JSON.parse(jsonData);
     }
     catch(e){
@@ -49,14 +49,14 @@ function loadNotes(){
 }
 
 
-
+//-----------------------------------------------//
 //---------------Removing Notes------------------//
-
+//-----------------------------------------------//
 function removeNotes(title){
     const notes = loadNotes();
     let index = -1;
-    const removeNotes = notes.filter(function (notes,ind){
-        if(notes.title == title){
+    const removeNotes = notes.filter(function (note,ind){
+        if(note.title == title){
             index = ind;
         }
     });
@@ -71,10 +71,25 @@ function removeNotes(title){
     
 }
 
+//-----------------------------------------------//
+//-----------------Listing Notes-----------------//
+//-----------------------------------------------//
+
+const listNotes = () =>{
+    const notes = loadNotes();
+    notes.forEach(note => {
+        console.log(
+            chalk.green.inverse(note.title)
+        );
+    });
+}
+
+
 
 module.exports = 
 {
     getNotes : getNotes,
     addNotes : addNotes,
     removeNotes: removeNotes,
+    listNotes: listNotes
 }
