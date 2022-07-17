@@ -85,11 +85,28 @@ const listNotes = () =>{
 }
 
 
+//-----------------------------------------------//
+//-----------------Reading Notes-----------------//
+//-----------------------------------------------//
+
+const readNotes = (title) =>{
+    const notes = loadNotes();
+    const readNote = notes.find(note => note.title === title); //We are using find instead of filter cuz find return the first element it matches without checking others.
+                                                               // note => note.title === title is same as (note) => {return note,title === title}
+    console.log(
+        chalk.green.inverse("Title:") + " " + readNote.title
+    );  
+    console.log(
+        chalk.green.inverse("Body:") + " " + readNote.body
+    );                                   
+}
+
 
 module.exports = 
 {
     getNotes : getNotes,
     addNotes : addNotes,
     removeNotes: removeNotes,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNotes: readNotes
 }
