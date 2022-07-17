@@ -1,4 +1,5 @@
 const fs = require("fs");
+const chalk = require("chalk");
 function getNotes(){
     return "Your notes ...";
 }
@@ -20,11 +21,11 @@ function addNotes(title,body){
     if(duplicateNotes.length == 0){
         notes.push(bufferData);
         saveNotes(notes);
-        console.log("Notes Saved");
+        console.log(chalk.green.inverse("Notes Saved"));
     }
 
     else{
-        console.log("Title already taken");
+        console.log(chalk.red.inverse("Title already taken"));
     }
    
 }
@@ -61,10 +62,10 @@ function removeNotes(title){
     });
     if (index > -1) { // only splice array when item is found
         notes.splice(index,1); // 2nd parameter means remove one item 
-        console.log(`Title:${title} removed!`);
+        console.log(chalk.green.inverse(`Title:${title} removed!`));
     }
     else{
-        console.log('Title not found')
+        console.log(chalk.red.inverse('Title not found'))
     }
     saveNotes(notes);
     
