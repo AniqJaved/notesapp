@@ -93,12 +93,20 @@ const readNotes = (title) =>{
     const notes = loadNotes();
     const readNote = notes.find(note => note.title === title); //We are using find instead of filter cuz find return the first element it matches without checking others.
                                                                // note => note.title === title is same as (note) => {return note,title === title}
-    console.log(
-        chalk.green.inverse("Title:") + " " + readNote.title
-    );  
-    console.log(
-        chalk.green.inverse("Body:") + " " + readNote.body
-    );                                   
+    
+    
+    if(readNote){
+        console.log(
+            chalk.green.inverse("Title:") + " " + readNote.title
+        );  
+        console.log(
+            chalk.green.inverse("Body:") + " " + readNote.body
+        );      
+    }
+    else{
+        console.log(chalk.red.inverse("Note not found"));
+    }
+                                 
 }
 
 
